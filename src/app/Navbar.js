@@ -7,7 +7,11 @@ const Navbar = () => {
   return (
     <div>
       <nav>
-        <div className="logo">VOLT</div>
+        <div className="logo">
+          <a href="/">
+            V<s>O</s>LT
+          </a>
+        </div>
         <div className="link">
           <a href="/">Home</a>
           <a href="/shop">Shop</a>
