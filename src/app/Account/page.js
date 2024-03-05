@@ -14,7 +14,6 @@ export default function Account() {
   const [formData, setFormData] = useState(initialFormData);
   const [isLogin, setIsLogin] = useState(false);
   const [isFailLogin, setIsFailLogin] = useState(false);
-  const [user, setUser] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +37,7 @@ export default function Account() {
       const response = await axios.post(login_url, jsonData);
       setIsLogin(true);
       console.log(response);
-      setUser(response.data.user);
+      setUser(response.data);
     } catch (error) {
       setIsFailLogin(true);
     }
