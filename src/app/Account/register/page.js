@@ -3,9 +3,12 @@
 import Navbar from "../../Navbar";
 import "./page.css";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 
 export default function Register() {
+  const router = useRouter();
+
   const initialFormData = {
     username: "",
     password: "",
@@ -15,6 +18,7 @@ export default function Register() {
   };
 
   const [formData, setFormData] = useState(initialFormData);
+  const [isCreate, setIsCreate] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -32,16 +36,17 @@ export default function Register() {
         "password": "${formData.password}",
         "firstName": "${formData.firstName}",
         "lastName": "${formData.lastName}",
-        "phone": "${formData.phoneNumber}"
+        "phoneNo": "${formData.phoneNumber}"
     }`;
 
     const jsonData = JSON.parse(text);
     console.log(jsonData);
+
     try {
       const register_url = "http://localhost:8080/api/auth/register";
       const response = await axios.post(register_url, jsonData);
-
-      console.log("User registered");
+      setIsCreate(true);
+      console.log(response);
     } catch (error) {
       console.error("Registration failed");
     }
@@ -60,78 +65,85 @@ export default function Register() {
           </div>
         </div>
 
-        {/* Body */}
-        <div className="register-body">
-          <div className="login">
-            <h1>Create Account</h1>
-            <p>Please register using account detail below.</p>
+        {!isCreate && (
+          <div className="register-body">
+            <div className="login">
+              <h1>Create Account</h1>
+              <p>Please register using account detail below.</p>
+            </div>
+            <form action="" onSubmit={handleSubmit}>
+              <div className="username">
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="Email"
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="password">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="first-name">
+                <input
+                  type="text"
+                  id="first-name"
+                  name="firstName"
+                  placeholder="First Name"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="last-name">
+                <input
+                  type="text"
+                  id="last-name"
+                  name="lastName"
+                  placeholder="Last Name"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+
+              <div className="phone">
+                <input
+                  type="text"
+                  id="phone"
+                  name="phoneNumber"
+                  placeholder="Phone Number"
+                  value={formData.phoneNumber}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+
+              <div className="enter">
+                <button type="submit" className="register-button">
+                  Create
+                </button>
+                <a href="/account">Login</a>
+              </div>
+            </form>
           </div>
-          <form action="" onSubmit={handleSubmit}>
-            <div className="username">
-              <input
-                type="text"
-                id="username"
-                name="username"
-                placeholder="Email"
-                value={formData.username}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="password">
-              <input
-                type="text"
-                id="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="first-name">
-              <input
-                type="text"
-                id="first-name"
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="last-name">
-              <input
-                type="text"
-                id="last-name"
-                name="lastName"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-
-            <div className="phone">
-              <input
-                type="text"
-                id="phone"
-                name="phoneNumber"
-                placeholder="Phone Number"
-                value={formData.phoneNumber}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-
-            <div className="enter">
-              <button type="submit" className="register-button">
-                Create
-              </button>
-              <a href="/">Return to Store</a>
-            </div>
-          </form>
-        </div>
+        )}
+        {isCreate && (
+          <h1>
+            Thank you for registering {formData.firstName} {formData.lastName}!
+            Click <a href="/account">here</a> to login
+          </h1>
+        )}
       </div>
     </>
   );

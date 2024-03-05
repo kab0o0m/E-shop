@@ -12,6 +12,9 @@ export default function Account() {
   };
 
   const [formData, setFormData] = useState(initialFormData);
+  const [isLogin, setIsLogin] = useState(false);
+  const [isFailLogin, setIsFailLogin] = useState(false);
+  const [user, setUser] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -32,10 +35,12 @@ export default function Account() {
 
     try {
       const login_url = "http://localhost:8080/api/auth/login";
-      await axios.post(login_url, jsonData);
-      console.log("Login");
+      const response = await axios.post(login_url, jsonData);
+      setIsLogin(true);
+      console.log(response);
+      setUser(response.data.user);
     } catch (error) {
-      console.error(error);
+      setIsFailLogin(true);
     }
   };
 
@@ -53,42 +58,51 @@ export default function Account() {
         </div>
 
         {/* Body */}
-        <div className="account-body">
-          <div className="login">
-            <h1>Login</h1>
-            <p>Please login using account detail below.</p>
+        {!isLogin && (
+          <div className="account-body">
+            <div className="login">
+              <h1>Login</h1>
+              <p>Please login using account detail below.</p>
+            </div>
+            <form action="" onSubmit={handleSubmit}>
+              <div className="email">
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="password">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              {isFailLogin && <p>Wrong username or password*</p>}
+              <div className="enter">
+                <button type="submit" className="account-button">
+                  Login
+                </button>
+                <a href="account/register">Create Account</a>
+              </div>
+            </form>
           </div>
-          <form action="" onSubmit={handleSubmit}>
-            <div className="email">
-              <input
-                type="text"
-                id="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="password">
-              <input
-                type="text"
-                id="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="enter">
-              <button type="submit" className="account-button">
-                Login
-              </button>
-              <a href="account/register">Create Account</a>
-            </div>
-          </form>
-        </div>
+        )}
+        {isLogin && (
+          <h1>
+            Welcome {user.firstName}! Click <a href="/shop">here</a> to start
+            shopping
+          </h1>
+        )}
       </div>
     </>
   );
