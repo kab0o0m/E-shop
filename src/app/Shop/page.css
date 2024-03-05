@@ -27,3 +27,15 @@
 .shop-header-page p{
   opacity: 0.5;
 }
+
+.shop-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 20rem;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  height: 5rem;
+}
