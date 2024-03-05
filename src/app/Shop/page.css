@@ -1,0 +1,29 @@
+.shop {
+  font-family: Roboto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+.shop-header{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 0 0 5rem;
+  background-color: #F2F2F2;
+  gap: 1rem;
+  width: 100%;
+  height: 5rem;
+  margin: 0 0 5rem 0;
+}
+
+.shop-header a{
+  text-decoration: none;
+  color: #303030;
+}
+
+.shop-header-page p{
+  opacity: 0.5;
+}

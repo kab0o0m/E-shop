@@ -1,4 +1,4 @@
-.account {
+.register {
   font-family: Roboto;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   overflow-x: hidden;
 }
 
-.account-header{
+.register-header{
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -19,17 +19,17 @@
   margin: 0 0 5rem 0;
 }
 
-.account-header a{
+.register-header a{
   text-decoration: none;
   color: #303030;
 }
 
-.account-header-page p{
+.register-header-page p{
   opacity: 0.5;
 }
 
-.account-body, 
-.account-body form {
+.register-body, 
+.register-body form {
   padding: 2rem 1rem 2rem 1rem;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@
   border-radius: 1rem;
 }
 
-.account-body {
+.register-body {
   margin: 0 0 5rem 0;
 }
 
@@ -51,7 +51,10 @@
 }
 
 .email,
-.password {
+.password,
+.phone,
+.first-name,
+.last-name {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -67,7 +70,7 @@ form input{
 }
 
 
-.account-button {
+.register-button {
   padding: 1rem 1rem 1rem 1rem;
   border: none;
   background-color: #333333;

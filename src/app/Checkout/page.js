@@ -1,3 +1,3 @@
-export default function page() {
-  <h1>Hello</h1>;
+export default function Checkout() {
+  return <h1>Hello</h1>;
 }
