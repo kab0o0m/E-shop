@@ -1,7 +1,7 @@
 .showcase {
-  display: flex;
-  margin: 0 5rem 0 5rem;
-  height: 25rem;
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  margin: 0 2rem 5rem 2rem;
   gap: 2rem;
 }
 
@@ -12,14 +12,14 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  width: 75%;
   padding: 0 0 0 2rem;
   justify-content: center;
   gap: 1rem;
   border-radius: 2rem;
 }
 
-.showcase-big button {
+.showcase-big button,
+.showcase-2 button {
   width: 12rem;
   padding: 1rem 2rem;
   display: flex;
@@ -28,6 +28,21 @@
   border: none;
   cursor: pointer;
 }
+.showcase-big button:hover {
+  background-color: #333333;
+  color: #FFFFFF;
+  transition: 0.3s ease-in-out
+}
+
+.showcase-big a {
+  width: 12rem;
+}
+
+.showcase-big p {
+  color: #434343;
+  font-size: 3rem;
+}
+
 
 .showcase-small {
   display: flex;
@@ -70,5 +85,80 @@
 .mini-home,
 .sounds {
   padding: 0 0 0 2rem;
+}
+
+.showcase-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin: 2rem 2rem 2rem 2rem;
+  gap: 2rem;
+}
+
+.showcase-2-1,
+.showcase-2-2,
+.showcase-2-3,
+.showcase-2-4 {
+  height: 40rem;
+
+}
+
+.showcase-2-1 p,
+.showcase-2-3 p,
+.showcase-2-2 p,
+.showcase-2-4 p{
+  padding: 2rem 1rem 2rem 0;
+  text-align: end;
+}
+
+.showcase-2-1-img,
+.showcase-2-2-img,
+.showcase-2-3-img,
+.showcase-2-4-img {
+  height: 30rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 1rem;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showcase-2-1-img {
+  background-image: url("../../public/img/airpods.webp");
+}
+
+.showcase-2-2-img {
+  background-image: url("../../public/img/golden-headset.webp");
+}
+
+.showcase-2-3-img {
+  background-image: url("../../public/img/apple-watch.webp");
+}
+
+.showcase-2-4-img {
+  background-image: url("../../public/img/other-phones.webp");
+}
+
+.showcase-2-1-img:hover,
+.showcase-2-2-img:hover,
+.showcase-2-3-img:hover,
+.showcase-2-4-img:hover {
+  transform: scale(1.1);
+}
+
+.showcase-2-1-img a,
+.showcase-2-2-img a,
+.showcase-2-3-img a,
+.showcase-2-4-img a {
+  display: none;
+}
+
+.showcase-2-1-img:hover > a,
+.showcase-2-2-img:hover > a,
+.showcase-2-3-img:hover > a,
+.showcase-2-4-img:hover > a {
+  display: block;
 }
 
