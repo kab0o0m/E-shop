@@ -98,8 +98,8 @@ export default function Account() {
         )}
         {isLogin && (
           <h1>
-            Welcome {user.firstName}! Click <a href="/shop">here</a> to start
-            shopping
+            Welcome {formData.firstName}! Click <a href="/shop">here</a> to
+            start shopping
           </h1>
         )}
       </div>

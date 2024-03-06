@@ -30,8 +30,8 @@
 }
 .showcase-big button:hover {
   background-color: #333333;
-  color: #FFFFFF;
-  transition: 0.3s ease-in-out
+  color: #ffffff;
+  transition: 0.3s ease-in-out;
 }
 
 .showcase-big a {
@@ -43,7 +43,6 @@
   font-size: 3rem;
 }
 
-
 .showcase-small {
   display: flex;
   flex-direction: column;
@@ -51,7 +50,7 @@
   gap: 1rem;
 }
 
-.showcase-small-1{
+.showcase-small-1 {
   display: flex;
   flex-direction: column;
   width: 15rem;
@@ -60,7 +59,7 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  color: #FFFFFF;
+  color: #ffffff;
   border-radius: 2rem;
 }
 
@@ -73,7 +72,7 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  color: #FFFFFF;
+  color: #ffffff;
   border-radius: 2rem;
 }
 
@@ -99,13 +98,12 @@
 .showcase-2-3,
 .showcase-2-4 {
   height: 40rem;
-
 }
 
 .showcase-2-1 p,
 .showcase-2-3 p,
 .showcase-2-2 p,
-.showcase-2-4 p{
+.showcase-2-4 p {
   padding: 2rem 1rem 2rem 0;
   text-align: end;
 }
@@ -162,3 +160,6 @@
   display: block;
 }
 
+.shopnow-button {
+  font-weight: 700;
+}
