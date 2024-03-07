@@ -5,6 +5,19 @@ import ProductCarousel from "@/app/components/ProductCarousel";
 import { Button } from "@/components/ui/button";
 
 const page = ({ params }) => {
+  const initialUser =
+    typeof localStorage !== "undefined"
+      ? JSON.parse(localStorage.getItem("user"))
+      : null;
+
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    // Check if the user is logged in
+    if (initialUser) {
+      setUser(initialUser); // Set the user state
+    }
+  }, []);
+
   return (
     <>
       <div className="w-full h-20 bg-slate-100 px-64 flex flex-col pt-7">

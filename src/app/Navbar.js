@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
+import { useState, useEffect } from "react";
 import "./Navbar.css";
 import Navigation from "./components/Navigation";
-import { CiHeart } from "react-icons/ci";
 import { FaUser } from "react-icons/fa6";
 import { MdShoppingCart } from "react-icons/md";
 import Link from "next/link";
@@ -21,6 +21,19 @@ const pfDisplay = Playfair_Display({
 });
 
 const Navbar = () => {
+  const initialUser =
+    typeof localStorage !== "undefined"
+      ? JSON.parse(localStorage.getItem("user"))
+      : null;
+
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    // Check if the user is logged in
+    if (initialUser) {
+      setUser(initialUser); // Set the user state
+    }
+  }, []);
+
   return (
     <div>
       <div className="w-full h-8 bg-orange-400 flex flex-row p-1.5 px-64 justify-between">
@@ -53,12 +66,9 @@ const Navbar = () => {
         </div>
         <Navigation />
         <div className="icons">
-          <div className="flex flex-row justify-between space-x-4">
+          <div className="flex flex-row justify-evenly space-x-4">
             <Link href="/account ">
               <FaUser size={18} className="mt-1 " />
-            </Link>
-            <Link href="/checkout">
-              <CiHeart size={24} />
             </Link>
             <Link href="/checkout">
               <MdShoppingCart size={25} />

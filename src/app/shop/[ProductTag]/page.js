@@ -2,8 +2,22 @@ import React from "react";
 import LayoutBar from "@/app/components/LayoutBar";
 import { FilterBar } from "@/app/components/FilterBar";
 import { ProductCard } from "@/app/components/ProductCard";
+import { useState, useEffect } from "react";
 
 const ProductTag = ({ params }) => {
+  const initialUser =
+    typeof localStorage !== "undefined"
+      ? JSON.parse(localStorage.getItem("user"))
+      : null;
+
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    // Check if the user is logged in
+    if (initialUser) {
+      setUser(initialUser); // Set the user state
+    }
+  }, []);
+
   return (
     <div>
       <div>
