@@ -2,7 +2,7 @@
 
 import Navbar from "../../Navbar";
 import "./page.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,12 @@ export default function Register() {
 
   const [formData, setFormData] = useState(initialFormData);
   const [isCreate, setIsCreate] = useState(false);
+
+  useEffect(() => {
+    if (isCreate) {
+      setTimeout(() => router.push("/account"), 5000);
+    }
+  }, [isCreate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -167,10 +173,13 @@ export default function Register() {
           </div>
         )}
         {isCreate && (
-          <h1>
-            Thank you for registering {formData.firstName} {formData.lastName}!
-            Click <a href="/account">here</a> to login
-          </h1>
+          <div>
+            <h1>
+              Thank you for registering {formData.firstName} {formData.lastName}
+              ! Click <a href="/account">here</a> to login
+            </h1>
+            <p>You will be redirected in 5s...</p>
+          </div>
         )}
       </div>
     </>

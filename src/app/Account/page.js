@@ -17,6 +17,7 @@ export default function Account() {
   const [formData, setFormData] = useState(initialFormData);
   const [isLogin, setIsLogin] = useState(false);
   const [isFailLogin, setIsFailLogin] = useState(false);
+  const [user, setUser] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +41,7 @@ export default function Account() {
       const response = await axios.post(login_url, jsonData);
       setIsLogin(true);
       console.log(response);
-      setUser(response.data);
+      setUser(response.data.user);
     } catch (error) {
       setIsFailLogin(true);
     }
@@ -107,8 +108,8 @@ export default function Account() {
         )}
         {isLogin && (
           <h1>
-            Welcome {formData.firstName}! Click <a href="/shop">here</a> to
-            start shopping
+            Welcome {user.firstName}! Click <a href="/shop">here</a> to start
+            shopping
           </h1>
         )}
       </div>
