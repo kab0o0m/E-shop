@@ -7,6 +7,7 @@ import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
 
 export default function Account() {
   const initialFormData = {
@@ -22,13 +23,13 @@ export default function Account() {
   const [isLogin, setIsLogin] = useState(false);
   const [isFailLogin, setIsFailLogin] = useState(false);
   const [user, setUser] = useState({});
+  const router = useRouter();
 
   useEffect(() => {
     // Check if the user is logged in
     if (initialUser) {
       setIsLogin(true); // Set isLogin to true
       setUser(initialUser); // Set the user state
-      console.log(initialUser);
     }
   }, []);
 
@@ -59,6 +60,13 @@ export default function Account() {
     } catch (error) {
       setIsFailLogin(true);
     }
+  };
+
+  const logOut = () => {
+    localStorage.clear();
+    setIsLogin(false);
+
+    router.push("/account");
   };
 
   return (
@@ -122,10 +130,42 @@ export default function Account() {
         )}
         {isLogin && (
           <div className="welcome">
+            <h1>Welcome {user.firstName}!</h1>
             <h1>
-              Welcome {user.firstName}! Click <a href="/shop">here</a> to start
-              shopping
+              Click <a href="/shop">here</a> to start shopping
             </h1>
+            <div className="account-details">
+              <h1>Account details</h1>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>First Name:</strong>
+                    </td>
+                    <td>{user.firstName}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Last Name:</strong>
+                    </td>
+                    <td>{user.lastName}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Email:</strong>
+                    </td>
+                    <td>{user.username}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Phone:</strong>
+                    </td>
+                    <td>{user.phoneNo}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button onClick={logOut}>Log out</button>
           </div>
         )}
       </div>

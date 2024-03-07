@@ -96,10 +96,11 @@ form input {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin: 0 0 5rem 0;
 }
 
 .welcome h1{
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 .welcome a {
@@ -110,25 +111,29 @@ form input {
   padding: 5rem 0 0 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.account-details h1 {
-  font-size: 2rem;
+.account-details p{
+  font-size: 1.5rem;
 }
 
-.account-table {
-  width: 100%; /* Make the table fill the container */
-  border-collapse: collapse; /* Collapse borders */
+.account-details td {
+  padding: 0 0 0 2rem;
 }
 
-.account-table td {
-  padding: 8px; /* Add padding to table cells */
-  border: 1px solid #ddd; /* Add border */
+.welcome button {
+  width: 12rem;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  border-radius: 2rem;
+  cursor: pointer;
+  border: 1px solid black;
+  margin: 2rem 0 0 0;
 }
 
-.account-table td:first-child {
-  width: 150px; /* Fixed width for first column */
-  font-weight: bold; /* Make label text bold */
-}
+
+
 
 
