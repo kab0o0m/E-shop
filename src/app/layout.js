@@ -1,12 +1,9 @@
-import { Roboto, Crimson_Text } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { Theme } from "@radix-ui/themes";
 import "./globals.css";
+import Navbar from "./Navbar";
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700"],
-  subsets: ["latin"],
-});
-const crimsonText = Crimson_Text({
-  weight: ["400", "600", "700"],
   subsets: ["latin"],
 });
 
@@ -18,7 +15,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} ${crimsonText.variable}`}>
+      <body className={`${roboto.variable}`}>
+        <Navbar />
         <Theme>{children}</Theme>
       </body>
     </html>

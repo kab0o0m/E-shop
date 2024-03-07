@@ -23,7 +23,7 @@ const pfDisplay = Playfair_Display({
 const Navbar = () => {
   return (
     <div>
-      <div className="w-full h-8 bg-orange-400 flex flex-row p-1.5 px-32 justify-between">
+      <div className="w-full h-8 bg-orange-400 flex flex-row p-1.5 px-64 justify-between">
         <p className="text-white font-normal text-sm">
           Need help? Call Us (+1234) 1235 432
         </p>
@@ -45,7 +45,7 @@ const Navbar = () => {
           </a>
         </div>
       </div>
-      <nav>
+      <nav className="w-full flex flex-row p-1.5 px-64 justify-between">
         <div className="logo">
           <Link href="/">
             <h1 className={`${pfDisplay.className} font-semibold`}>Vølt</h1>
@@ -53,7 +53,7 @@ const Navbar = () => {
         </div>
         <Navigation />
         <div className="icons">
-          <div className="flex flex-row space-x-7">
+          <div className="flex flex-row justify-between space-x-4">
             <Link href="/account ">
               <FaUser size={18} className="mt-1 " />
             </Link>
