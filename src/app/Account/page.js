@@ -2,7 +2,7 @@
 
 import Navbar from "../Navbar";
 import "./page.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,10 +14,23 @@ export default function Account() {
     password: "",
   };
 
+  const initialUser =
+    typeof localStorage !== "undefined"
+      ? JSON.parse(localStorage.getItem("user"))
+      : null;
   const [formData, setFormData] = useState(initialFormData);
   const [isLogin, setIsLogin] = useState(false);
   const [isFailLogin, setIsFailLogin] = useState(false);
   const [user, setUser] = useState({});
+
+  useEffect(() => {
+    // Check if the user is logged in
+    if (initialUser) {
+      setIsLogin(true); // Set isLogin to true
+      setUser(initialUser); // Set the user state
+      console.log(initialUser);
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -42,6 +55,7 @@ export default function Account() {
       setIsLogin(true);
       console.log(response);
       setUser(response.data.user);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
     } catch (error) {
       setIsFailLogin(true);
     }
@@ -107,10 +121,12 @@ export default function Account() {
           </div>
         )}
         {isLogin && (
-          <h1>
-            Welcome {user.firstName}! Click <a href="/shop">here</a> to start
-            shopping
-          </h1>
+          <div className="welcome">
+            <h1>
+              Welcome {user.firstName}! Click <a href="/shop">here</a> to start
+              shopping
+            </h1>
+          </div>
         )}
       </div>
     </>
