@@ -79,7 +79,6 @@ export default function Register() {
 
   return (
     <>
-      <Navbar />
       {/* Header */}
       <div className="register">
         <div className="register-header">
