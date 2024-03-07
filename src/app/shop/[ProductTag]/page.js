@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import LayoutBar from "@/app/components/LayoutBar";
 import { FilterBar } from "@/app/components/FilterBar";
@@ -46,6 +48,7 @@ const ProductTag = ({ params }) => {
             price={1239}
             imgsrc="/img/applewatch-home.png"
           />
+          {user.firstName}
         </div>
       </div>
     </div>

@@ -1,8 +1,11 @@
+"use client";
+
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import ProductCarousel from "@/app/components/ProductCarousel";
 import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
 
 const page = ({ params }) => {
   const initialUser =
