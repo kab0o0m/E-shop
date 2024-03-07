@@ -71,7 +71,6 @@ export default function Account() {
 
   return (
     <>
-      <Navbar />
       <div className="account">
         {/* Header */}
         <div className="account-header">

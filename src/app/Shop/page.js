@@ -1,6 +1,5 @@
 "use client";
 
-import Navbar from "../Navbar";
 import "./page.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -27,8 +26,6 @@ export default function Shop() {
 
   return (
     <>
-      <Navbar />
-
       {!isLoading && (
         <div className="shop">
           {/* Header */}
@@ -40,15 +37,15 @@ export default function Shop() {
             </div>
           </div>
           {/* Body */}
-          <div className="shop-body">
-            {allProducts.length !== 0 &&
+          <div className="px-64 flex flex-row">
+            {/* {allProducts.length !== 0 &&
               Object.values(allProducts).map((product, index) => (
                 <div key={index} className="product">
                   <p>{product.name}</p>
                   <p>{product.description}</p>
                   <p>{product.price}</p>
                 </div>
-              ))}
+              ))} */}
           </div>
         </div>
       )}
