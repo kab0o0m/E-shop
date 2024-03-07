@@ -5,6 +5,9 @@ import "./page.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function Register() {
   const router = useRouter();
@@ -84,71 +87,80 @@ export default function Register() {
         {!isCreate && (
           <div className="register-body">
             <div className="login">
-              <h1>Create Account</h1>
-              <p>Please register using account detail below.</p>
+              <h1 className="text-3xl font-light">Create Account</h1>
             </div>
             <form action="" onSubmit={handleSubmit}>
               <div className="username">
-                <input
+                <Label htmlFor="email">Email</Label>
+                <Input
                   type="text"
                   id="username"
                   name="username"
-                  placeholder="Email"
+                  placeholder="e.g. johndoe@mail.com"
                   value={formData.username}
                   onChange={handleInputChange}
+                  className="w-[30rem]"
                   required
                 />
               </div>
               <div className="password">
-                <input
+                <Label htmlFor="password">Password</Label>
+                <Input
                   type="password"
                   id="password"
                   name="password"
                   placeholder="Password"
                   value={formData.password}
                   onChange={handleInputChange}
+                  className="w-[30rem]"
                   required
                 />
               </div>
               <div className="first-name">
-                <input
+                <Label htmlFor="first-name">First Name</Label>
+                <Input
                   type="text"
                   id="first-name"
                   name="firstName"
-                  placeholder="First Name"
+                  placeholder="e.g. John"
                   value={formData.firstName}
                   onChange={handleInputChange}
+                  className="w-[30rem]"
                   required
                 />
               </div>
               <div className="last-name">
-                <input
+                <Label htmlFor="last-name">Last Name</Label>
+                <Input
                   type="text"
                   id="last-name"
                   name="lastName"
-                  placeholder="Last Name"
+                  placeholder="e.g. Doe"
                   value={formData.lastName}
                   onChange={handleInputChange}
+                  className="w-[30rem]"
                   required
                 />
               </div>
 
               <div className="phone">
-                <input
+                <Label htmlFor="email">Mobile Number</Label>
+                <Input
                   type="text"
                   id="phone"
                   name="phoneNumber"
-                  placeholder="Phone Number"
+                  placeholder="e.g. 8888 8888"
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
+                  className="w-[30rem]"
                   required
                 />
               </div>
 
               <div className="enter">
-                <button type="submit" className="register-button">
+                <Button type="submit" className="register-button">
                   Create
-                </button>
+                </Button>
                 <a href="/account">Login</a>
               </div>
             </form>

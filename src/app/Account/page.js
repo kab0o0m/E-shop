@@ -4,6 +4,9 @@ import Navbar from "../Navbar";
 import "./page.css";
 import { useState } from "react";
 import axios from "axios";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function Account() {
   const initialFormData = {
@@ -60,23 +63,26 @@ export default function Account() {
         {!isLogin && (
           <div className="account-body">
             <div className="login">
-              <h1>Login</h1>
-              <p>Please login using account detail below.</p>
+              <h1 className="text-3xl font-light">Login</h1>
             </div>
             <form action="" onSubmit={handleSubmit}>
               <div className="email">
-                <input
+                <Label htmlFor="email">Email</Label>
+                <Input
                   type="text"
                   id="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder="john.doe@mail.com"
                   value={formData.email}
                   onChange={handleInputChange}
                   required
+                  className="w-[30rem]"
                 />
               </div>
+
               <div className="password">
-                <input
+                <Label htmlFor="password">Password</Label>
+                <Input
                   type="password"
                   id="password"
                   name="password"
@@ -84,13 +90,16 @@ export default function Account() {
                   value={formData.password}
                   onChange={handleInputChange}
                   required
+                  className="w-[30rem]"
                 />
               </div>
-              {isFailLogin && <p>Wrong username or password*</p>}
-              <div className="enter">
-                <button type="submit" className="account-button">
+              {isFailLogin && (
+                <p className="text-red-400">Invalid username or password!</p>
+              )}
+              <div className="enter mt-5">
+                <Button type="submit" className="rounded-full px-12 my-3">
                   Login
-                </button>
+                </Button>
                 <a href="account/register">Create Account</a>
               </div>
             </form>
@@ -98,8 +107,8 @@ export default function Account() {
         )}
         {isLogin && (
           <h1>
-            Welcome {user.firstName}! Click <a href="/shop">here</a> to start
-            shopping
+            Welcome {formData.firstName}! Click <a href="/shop">here</a> to
+            start shopping
           </h1>
         )}
       </div>

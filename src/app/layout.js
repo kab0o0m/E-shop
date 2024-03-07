@@ -1,7 +1,14 @@
-import { Inter } from "next/font/google";
+import { Roboto, Crimson_Text } from "next/font/google";
+import { Theme } from "@radix-ui/themes";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  weight: ["100", "300", "400", "500", "700"],
+  subsets: ["latin"],
+});
+const crimsonText = Crimson_Text({
+  weight: ["400", "600", "700"],
+  subsets: ["latin"],
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +18,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${roboto.variable} ${crimsonText.variable}`}>
+        <Theme>{children}</Theme>
+      </body>
     </html>
   );
 }
