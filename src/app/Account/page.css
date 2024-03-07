@@ -1,7 +1,6 @@
 .account {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   overflow-x: hidden;
 }
@@ -84,3 +83,52 @@ form input {
 .enter a {
   opacity: 0.5;
 }
+.view-account {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 0 0 5rem;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome h1{
+  font-size: 2rem;
+}
+
+.welcome a {
+  color: #FFB400;
+}
+
+.account-details{
+  padding: 5rem 0 0 5rem;;
+  display: flex;
+  flex-direction: column;
+}
+
+.account-details h1 {
+  font-size: 2rem;
+}
+
+.account-table {
+  width: 100%; /* Make the table fill the container */
+  border-collapse: collapse; /* Collapse borders */
+}
+
+.account-table td {
+  padding: 8px; /* Add padding to table cells */
+  border: 1px solid #ddd; /* Add border */
+}
+
+.account-table td:first-child {
+  width: 150px; /* Fixed width for first column */
+  font-weight: bold; /* Make label text bold */
+}
+
+

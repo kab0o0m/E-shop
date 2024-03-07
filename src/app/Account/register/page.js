@@ -19,9 +19,11 @@ export default function Register() {
     lastName: "",
     phoneNumber: "",
   };
+  const initialUser = JSON.parse(localStorage.getItem("user"));
 
   const [formData, setFormData] = useState(initialFormData);
   const [isCreate, setIsCreate] = useState(false);
+  const [user, setUser] = useState(initialUser);
 
   useEffect(() => {
     if (isCreate) {
@@ -29,6 +31,10 @@ export default function Register() {
     }
   }, [isCreate]);
 
+  useEffect(() => {
+    setIsCreate(true);
+    router.push("/account");
+  }, [user]);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({

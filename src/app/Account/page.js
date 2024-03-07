@@ -2,7 +2,7 @@
 
 import Navbar from "../Navbar";
 import "./page.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,10 +14,17 @@ export default function Account() {
     password: "",
   };
 
+  const initialUser = JSON.parse(localStorage.getItem("user"));
   const [formData, setFormData] = useState(initialFormData);
   const [isLogin, setIsLogin] = useState(false);
   const [isFailLogin, setIsFailLogin] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(initialUser);
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+    setIsLogin(true);
+    console.log(user);
+  }, [user]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +47,6 @@ export default function Account() {
       const login_url = "http://localhost:8080/api/auth/login";
       const response = await axios.post(login_url, jsonData);
       setIsLogin(true);
-      console.log(response);
       setUser(response.data.user);
     } catch (error) {
       setIsFailLogin(true);
@@ -107,10 +113,42 @@ export default function Account() {
           </div>
         )}
         {isLogin && (
-          <h1>
-            Welcome {user.firstName}! Click <a href="/shop">here</a> to start
-            shopping
-          </h1>
+          <div className="view-account">
+            <div className="welcome">
+              <h1>Welcome {user.firstName}!</h1>
+              <p>
+                Click <a href="/shop">here</a> to start shopping
+              </p>
+            </div>
+            <div className="account-details">
+              <h1>Account details</h1>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Email: </strong>
+                    </td>
+                    <td> {user.username}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Phone:</strong>
+                    </td>
+                    <td> {user.phoneNo}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Name: </strong>
+                    </td>
+                    <td>
+                      {" "}
+                      {user.firstName} {user.lastName}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         )}
       </div>
     </>
