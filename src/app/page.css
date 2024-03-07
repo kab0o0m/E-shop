@@ -21,7 +21,7 @@
 .showcase-big button,
 .showcase-2 button {
   width: 12rem;
-  padding: 1rem 2rem;
+  padding: 10px;
   display: flex;
   justify-content: center;
   border-radius: 2rem;
@@ -161,5 +161,9 @@
 }
 
 .shopnow-button {
-  font-weight: 700;
+  font-weight: 400;
+  background-color: #ffffff;
+  opacity: 0.75;
+  color: #333333;
+  transition: 0.3s ease-in-out;
 }
