@@ -73,6 +73,9 @@ export default function Shop() {
           </div>
 
           <div className="info-bar">
+            <div className="displayed-number">
+              Showing 1 - {allProducts.length} of {allProducts.length} result
+            </div>
             <div className="sort">
               Sort By:
               <select value={sort} onChange={handleSortChange}>
