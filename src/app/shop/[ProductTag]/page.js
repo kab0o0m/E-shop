@@ -48,7 +48,6 @@ const ProductTag = ({ params }) => {
             price={1239}
             imgsrc="/img/applewatch-home.png"
           />
-          {user.firstName}
         </div>
       </div>
     </div>
