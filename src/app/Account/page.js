@@ -56,6 +56,11 @@ export default function Account() {
       setIsLogin(true);
       console.log(response);
       setUser(response.data.user);
+      localStorage.setItem(
+        "jwtToken",
+        JSON.stringify(response.data.tokenType + response.data.accessToken)
+      );
+      localStorage.setItem("session", JSON.stringify(response.data.session));
       localStorage.setItem("user", JSON.stringify(response.data.user));
     } catch (error) {
       setIsFailLogin(true);

@@ -12,27 +12,22 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 
-const ProductCarousel = () => {
-  const [imageSrc, setImageSrc] = useState("/img/iphone-home.png");
+const ProductCarousel = ({ sourceUrl }) => {
+  const [imageSrc, setImageSrc] = useState(sourceUrl);
   const changeImage = (imgSrc) => {
     setImageSrc(imgSrc);
   };
-  const productArray = [
-    "/img/iphone-home.png",
-    "/img/applewatch-home.png",
-    "/img/iphone-home.png",
-    "/img/applewatch-home.png",
-    "/img/iphone-home.png",
-  ];
+  let ProductArray = [];
+  for (let i = 0; i < 5; i++) ProductArray.push(sourceUrl);
   return (
     <Card className="pt-5 w-5/12 ">
       <CardContent>
         <Image
-          alt={imageSrc}
-          width={650}
-          height={600}
+          alt={sourceUrl}
+          width={450}
+          height={400}
           src={imageSrc}
-          className="rounded-md"
+          className="rounded-md mx-auto aspect-square"
         />
         <div className="my-6" />
 
@@ -43,17 +38,17 @@ const ProductCarousel = () => {
           }}
         >
           <CarouselContent>
-            {productArray.map((link, index) => (
+            {ProductArray.map((link, index) => (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                 <div className="p-1">
                   <Card className="w-fit border-0 ">
                     <div onClick={() => changeImage(link)}>
                       <Image
-                        alt="/img/applewatch-home.png"
+                        alt={index}
                         width={200}
                         height={200}
                         src={link}
-                        className="rounded-md"
+                        className="rounded-md aspect-square"
                       />
                     </div>
                   </Card>

@@ -17,39 +17,20 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-
 const frameworks = [
   {
-    value: "Alphabetical, A-Z",
-    label: "Alphabetical, A-Z",
+    value: "a-z",
+    label: "Alphabetical (A-Z)",
   },
   {
-    value: "Alphabetical, Z-A",
-    label: "Alphabetical, Z-A",
+    value: "z-a",
+    label: "Alphabetical (Z-A)",
   },
-  {
-    value: "Price, Low-High",
-    label: "Price, Low-High",
-  },
-  {
-    value: "Price, High-Low",
-    label: "Price, High-Low",
-  },
-  {
-    value: "Date, Old-New",
-    label: "Date, Old-New",
-  },
-  {
-    value: "Date, New-Old",
-    label: "Date, New-Old",
-  },
-  {
-    value: "Featured",
-    label: "Featured",
-  },
+  { value: "low-high", label: "Price (Low to High)" },
+  { value: "high-low", label: "Price (High to Low)" },
 ];
 
-export function ComboBox() {
+export function ComboBox({ onFilterChange }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
@@ -64,13 +45,13 @@ export function ComboBox() {
         >
           {value
             ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select Filter"}
+            : "Filter"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search Filter" />
+          <CommandInput placeholder="Filter" />
           <CommandEmpty>No framework found.</CommandEmpty>
           <CommandGroup>
             {frameworks.map((framework) => (
@@ -78,6 +59,7 @@ export function ComboBox() {
                 key={framework.value}
                 value={framework.value}
                 onSelect={(currentValue) => {
+                  onFilterChange(currentValue);
                   setValue(currentValue === value ? "" : currentValue);
                   setOpen(false);
                 }}

@@ -14,17 +14,17 @@ import Link from "next/link";
 export const ProductCard = ({ imgsrc, title, category, price }) => {
   return (
     <Link
-      href={`/shop/${category}/${title}`}
+      href={`/shop/${title}`}
       className="hover:scale-105 transition ease-in-out duration-100"
     >
       <Card className="pt-5">
         <CardContent>
           <Image
             alt={imgsrc}
-            width={650}
-            height={600}
+            width={200}
+            height={250}
             src={imgsrc}
-            className="rounded-md"
+            className="rounded-md mx-auto"
           />
         </CardContent>
 
