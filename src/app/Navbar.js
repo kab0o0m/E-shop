@@ -72,9 +72,7 @@ const Navbar = () => {
             <Link href="/account ">
               <FaUser size={18} className="mt-1 " />
             </Link>
-            <Link href="/checkout">
-              <ShoppingCart />
-            </Link>
+            <ShoppingCart />
           </div>
         </div>
       </nav>
