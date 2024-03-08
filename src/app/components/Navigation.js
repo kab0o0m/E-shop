@@ -27,7 +27,6 @@ const Navigation = () => {
             <p className="font-light text-lg">Shop</p>
           </NavigationMenuLink>
         </Link>
-
         <NavigationMenuItem>
           <NavigationMenuTrigger className="font-light text-lg">
             Accessories

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Elements } from "@stripe/react-stripe-js";
+import { Elements, CardElement } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import dynamic from "next/dynamic";
 
@@ -17,6 +17,7 @@ const stripePromise = loadStripe(
 
 export default function Checkout() {
   const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
@@ -52,21 +53,24 @@ export default function Checkout() {
               />
             </div>
             <h2 className="text-xl font-bold mb-4">Delivery</h2>
-            <select
-              id="country"
-              name="country"
-              className="mb-1 p-2 w-full border rounded-md"
-              defaultValue=""
-            >
-              <option value="" disabled hidden>
-                Country/Region
-              </option>
-              {countries.map((country) => (
-                <option key={country.code} value={country.code}>
-                  {country.name}
+            {countries.length > 0 && (
+              <select
+                id="country"
+                name="country"
+                className="mb-1 p-2 w-full border rounded-md"
+                value={selectedCountry}
+                onChange={(e) => setSelectedCountry(e.target.value)}
+              >
+                <option value="" disabled hidden>
+                  Country/Region
                 </option>
-              ))}
-            </select>
+                {countries.map((country) => (
+                  <option key={country.code} value={country.code}>
+                    {country.name}
+                  </option>
+                ))}
+              </select>
+            )}
 
             <div className="mt-2 mb-4 flex">
               <div className="w-1/2 mr-2">
@@ -142,12 +146,30 @@ export default function Checkout() {
                 />
               </div>
             </div>
+            {/* Shopping cart items and summary goes here */}
             <Elements stripe={stripePromise}>
-              <DynamicCheckoutForm />
+              <CardElement
+                options={{
+                  style: {
+                    base: {
+                      fontSize: "16px",
+                      color: "#333",
+                      "::placeholder": {
+                        color: "#999",
+                      },
+                    },
+                    invalid: {
+                      color: "#e53e3e",
+                    },
+                  },
+                }}
+                className="border rounded-md p-2 w-full"
+              />
             </Elements>
+
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3"
             >
               Pay Now
             </button>
