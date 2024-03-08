@@ -1,6 +1,5 @@
 "use client";
 
-import "./page.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductCard } from "../components/ProductCard";

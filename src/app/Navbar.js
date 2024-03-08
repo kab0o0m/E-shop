@@ -1,12 +1,14 @@
 "use client";
-import React from "react";
-import { useState, useEffect } from "react";
+
 import "./Navbar.css";
+import React from "react";
+import Link from "next/link";
 import Navigation from "./components/Navigation";
+import ShoppingCart from "./components/ShoppingCart";
 import { FaUser } from "react-icons/fa6";
 import { MdShoppingCart } from "react-icons/md";
-import Link from "next/link";
 import { Playfair_Display } from "next/font/google";
+import { useState, useEffect } from "react";
 import {
   BsTwitterX,
   BsInstagram,
@@ -14,6 +16,7 @@ import {
   BsYoutube,
   BsFacebook,
 } from "react-icons/bs";
+
 const pfDisplay = Playfair_Display({
   weight: ["400", "600", "700"],
   subsets: ["latin"],
@@ -70,7 +73,7 @@ const Navbar = () => {
               <FaUser size={18} className="mt-1 " />
             </Link>
             <Link href="/checkout">
-              <MdShoppingCart size={25} />
+              <ShoppingCart />
             </Link>
           </div>
         </div>
