@@ -8,18 +8,18 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 
 const page = ({ params }) => {
-  const initialUser =
-    typeof localStorage !== "undefined"
-      ? JSON.parse(localStorage.getItem("user"))
-      : null;
+  //   const initialUser =
+  //     typeof localStorage !== "undefined"
+  //       ? JSON.parse(localStorage.getItem("user"))
+  //       : null;
 
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    // Check if the user is logged in
-    if (initialUser) {
-      setUser(initialUser); // Set the user state
-    }
-  }, []);
+  //   const [user, setUser] = useState({});
+  //   useEffect(() => {
+  //     // Check if the user is logged in
+  //     if (initialUser) {
+  //       setUser(initialUser); // Set the user state
+  //     }
+  //   }, []);
 
   return (
     <>

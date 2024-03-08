@@ -3,11 +3,17 @@
 import "./page.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { ProductCard } from "../components/ProductCard";
+import LayoutBar from "../components/LayoutBar";
+import { FilterBar } from "../components/FilterBar";
 
 export default function Shop() {
   const [allProducts, setAllProducts] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [sort, setSort] = useState("default");
+  const handleChangeFilter = (filterState) => {
+    setSort(filterState);
+  };
   const initialUser =
     typeof localStorage !== "undefined"
       ? JSON.parse(localStorage.getItem("user"))
@@ -62,60 +68,34 @@ export default function Shop() {
   return (
     <>
       {!isLoading && (
-        <div className="shop">
-          {/* Header */}
-          <div className="shop-header">
-            <a href="/">Home</a>
-            <div>/</div>
-            <div className="shop-header-page">
-              <p>Shop</p>
-            </div>
-          </div>
-
-          <div className="info-bar">
-            <div className="displayed-number">
-              Showing 1 - {allProducts.length} of {allProducts.length} result
-            </div>
-            <div className="sort">
-              Sort By:
-              <select value={sort} onChange={handleSortChange}>
-                <option value="default">Default</option>
-                <option value="a-z">Name (A-Z)</option>
-                <option value="z-a">Name (Z-A)</option>
-                <option value="low-high">Price (Low to High)</option>
-                <option value="high-low">Price (High to Low)</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Body */}
-          <div className="flex flex-wrap justify-center">
-            {sortedProducts(sort).map((product, index) => (
-              <div
-                key={index}
-                className="max-w-xs rounded overflow-hidden shadow-lg m-4"
-              >
-                <img
-                  src={product.imageLink}
-                  alt={product.name}
-                  className="w-full"
-                />
-                <div className="px-6 py-4">
-                  <div className="font-bold text-xl mb-2">{product.name}</div>
-                  <p className="text-gray-700 text-base">
-                    {product.description}
-                  </p>
-                  <p className="text-gray-700 text-base mt-2">
-                    ${product.price.toFixed(2)}
-                  </p>
-                </div>
-                <div className="px-6 py-4 flex justify-center">
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Add to Cart
-                  </button>
-                </div>
+        <div>
+          <div>
+            <div className="w-full h-48 bg-slate-100 px-64 py-10 flex flex-col">
+              <h1 className="text-[48px] font-thin">Shop</h1>
+              <div className="flex flex-row space-x-2 font-light">
+                <h1 className="font-semibold">Shop </h1>
+                <h1 className="font-semibold"> / </h1>
+                <h1> Shop</h1>
               </div>
-            ))}
+            </div>
+            <LayoutBar
+              noOfItems={allProducts.length}
+              onFilterChange={handleChangeFilter}
+            />
+          </div>
+          <div className="flex flex-row px-64 justify-between">
+            <FilterBar className="w-1/3" />
+            <div className="grid gap-4 grid-cols-3 mt-3 w-2/3">
+              {sortedProducts(sort).map((product, index) => (
+                <ProductCard
+                  key={index}
+                  title={product.name}
+                  category={product.category_id}
+                  price={product.price.toFixed(2)}
+                  imgsrc={product.imageLink}
+                />
+              ))}
+            </div>
           </div>
         </div>
       )}

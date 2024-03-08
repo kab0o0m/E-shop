@@ -21,10 +21,10 @@ export const ProductCard = ({ imgsrc, title, category, price }) => {
         <CardContent>
           <Image
             alt={imgsrc}
-            width={650}
-            height={600}
+            width={200}
+            height={250}
             src={imgsrc}
-            className="rounded-md"
+            className="rounded-md mx-auto"
           />
         </CardContent>
 
