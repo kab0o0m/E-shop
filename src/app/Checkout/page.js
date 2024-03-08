@@ -4,13 +4,6 @@ import { Elements, CardElement } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import dynamic from "next/dynamic";
 
-const DynamicCheckoutForm = dynamic(
-  () => import("../components/CheckOutForm"),
-  {
-    ssr: false, // Ensure that CheckoutForm is not rendered on the server-side
-  }
-);
-
 const stripePromise = loadStripe(
   "pk_test_51Os5EMP9xUJVEDnu2yjZFNI1c7PqxT9VgUaMDl2aTVe0M4FzJYbHbPuLPuOfL1zkn0NANXSactWRN8BJFneYxb0E00wuTe5QTd"
 );
