@@ -48,7 +48,11 @@ const Items = ({ params }) => {
           price: qty * item.price,
         }
       );
-      console.log(sessionUpdateResponse);
+      console.log(sessionUpdateResponse.data);
+      localStorage.setItem(
+        "session",
+        JSON.stringify(sessionUpdateResponse.data)
+      );
       toast({
         title: "Item added to cart!",
         description: "Go to your shopping cart to check out.",
