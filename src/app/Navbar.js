@@ -4,7 +4,7 @@ import "./Navbar.css";
 import React from "react";
 import Link from "next/link";
 import Navigation from "./components/Navigation";
-import ShoppingCart from "./components/ShoppingCart";
+import ShoppingCartSheet from "./components/ShoppingCartSheet";
 import { FaUser } from "react-icons/fa6";
 import { MdShoppingCart } from "react-icons/md";
 import { Playfair_Display } from "next/font/google";
@@ -72,7 +72,7 @@ const Navbar = () => {
             <Link href="/account ">
               <FaUser size={18} className="mt-1 " />
             </Link>
-            <ShoppingCart />
+            <ShoppingCartSheet />
           </div>
         </div>
       </nav>

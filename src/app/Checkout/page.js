@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import CheckoutForm from "../components/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import ShoppingCart from "../components/ShoppingCart";
 
 const stripePromise = loadStripe(
   "pk_test_51Os5EMP9xUJVEDnu2yjZFNI1c7PqxT9VgUaMDl2aTVe0M4FzJYbHbPuLPuOfL1zkn0NANXSactWRN8BJFneYxb0E00wuTe5QTd"
@@ -33,9 +34,9 @@ const CheckoutPage = () => {
 
   return (
     <div className="flex justify-evenly mt-8 w-full">
-      <div className="w-full max-w-4xl flex justify-between">
+      <div className="w-full max-w-4xl flex justify-between shadow-md rounded-lg">
         {/* Payment Details Section */}
-        <div className="w-1/2 bg-white p-8 rounded-lg shadow-md">
+        <div className="w-1/2 bg-gray-100 p-8 rounded-l-lg">
           <h2 className="text-xl font-bold mb-4">Contact</h2>
           <div className="mb-4">
             <input
@@ -145,9 +146,10 @@ const CheckoutPage = () => {
           </Elements>
         </div>
         {/* Shopping Cart Section */}
-        <div className="w-1/2 bg-gray-100 p-8 rounded-lg shadow-md">
+        <div className="w-1/2 bg-white p-8 rounded-r-lg">
           <h2 className="text-xl font-bold mb-4">Shopping Cart</h2>
           {/* Shopping cart items and summary goes here */}
+          <ShoppingCart />
         </div>
       </div>
     </div>
