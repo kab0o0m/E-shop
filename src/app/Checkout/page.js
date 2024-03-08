@@ -25,9 +25,10 @@ const CheckoutPage = () => {
       .catch((error) => console.error("Error fetching countries:", error));
   }, []);
 
-  const handleSubmit = () => {
-    // Handle submission logic here
+  const handleSubmit = (paymentMethod) => {
+    // Handle successful payment here
     console.log("Payment successful");
+    console.log(paymentMethod);
   };
 
   return (

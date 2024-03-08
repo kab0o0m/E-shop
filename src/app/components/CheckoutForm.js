@@ -14,7 +14,7 @@ const CheckoutForm = ({ handleSubmit }) => {
       return;
     }
 
-    const { error } = await stripe.createPaymentMethod({
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
     });
@@ -22,7 +22,7 @@ const CheckoutForm = ({ handleSubmit }) => {
     if (error) {
       console.error("Error creating payment method:", error);
     } else {
-      handleSubmit();
+      handleSubmit(paymentMethod);
     }
 
     setLoading(false);
