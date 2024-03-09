@@ -11,7 +11,7 @@ import {
 
 const CartItem = ({ name, quantity, imageLink, price }) => {
   return (
-    <div className="border-t">
+    <div className="">
       <div className="flex flex-row items-center">
         <Image alt={name} src={imageLink} width={100} height={100} />
         <div className="flex flex-col">
