@@ -40,6 +40,7 @@ const Items = ({ params }) => {
         }
       );
       localStorage.setItem("session", JSON.stringify(sessionResponse.data));
+      console.log(localStorage);
       toast({
         title: "Item added to cart!",
         description: "Go to your shopping cart to check out.",

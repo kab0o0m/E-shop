@@ -31,7 +31,14 @@ const CheckoutPage = () => {
           },
         }
       );
-      delete sessionData.total;
+      if (sessionData && sessionData.hasOwnProperty("total")) {
+        // Set total to 0
+        sessionData.total = 0;
+
+        // Set the updated session data back to localStorage
+        localStorage.setItem("session", JSON.stringify(sessionData));
+      }
+
       console.log(response.data); // Log the response data
     } catch (error) {
       console.error("Error fetching cart items:", error);
