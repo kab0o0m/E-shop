@@ -126,7 +126,7 @@ const ShoppingCartSheet = () => {
               </h1>
             </div>
             <SheetClose asChild>
-              {total === null ? (
+              {total === 0 || total === null ? (
                 <Button className="w-full" disabled>
                   Checkout
                 </Button>
