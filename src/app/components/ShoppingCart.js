@@ -10,15 +10,19 @@ const ShoppingCart = () => {
   const [myCartItems, setMyCartItems] = useState([]);
   const [total, setTotal] = useState(null);
   const getMyCartItems = async () => {
-    const myCartItems = await axios.post(
-      "http://localhost:8080/api/cart_item/my_cart",
-      {
-        sessionId: JSON.parse(localStorage.getItem("session")).id,
+    try {
+      const sessionData = JSON.parse(localStorage.getItem("session"));
+      if (sessionData && sessionData.id) {
+        const response = await axios.post(
+          "http://localhost:8080/api/cart_item/my_cart",
+          { sessionId: sessionData.id }
+        );
+        setMyCartItems(response.data);
+        setTotal(sessionData.total ? sessionData.total.toFixed(2) : null);
       }
-    );
-    setTotal(JSON.parse(localStorage.getItem("session")).total.toFixed(2));
-    setMyCartItems(myCartItems.data);
-    console.log(myCartItems.data);
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
   };
   useEffect(() => {
     getMyCartItems();
