@@ -109,7 +109,8 @@ export default function Shop() {
                     .filter((item) => {
                       console.log(item.price);
                       return (
-                        item.price <= Number(toValue) &&
+                        item.price <=
+                          Number(toValue === "" ? 99999 : toValue) &&
                         item.price >= Number(fromValue)
                       );
                     })
@@ -126,7 +127,7 @@ export default function Shop() {
                     .filter((item) => {
                       return (
                         item.categoryId === category &&
-                        item.price <= Number(toValue) &&
+                        Number(toValue === "" ? 99999 : toValue) &&
                         item.price >= Number(fromValue)
                       );
                     })
