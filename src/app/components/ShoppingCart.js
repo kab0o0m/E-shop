@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import CartItem from "./CartItem";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const ShoppingCart = () => {
