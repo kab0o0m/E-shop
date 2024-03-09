@@ -10,8 +10,19 @@ export default function Shop() {
   const [allProducts, setAllProducts] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [sort, setSort] = useState("default");
+  const [category, setCategory] = useState("none");
+  const [fromValue, setFromValue] = useState("0");
+  const [toValue, setToValue] = useState("999999");
+
+  const handlePriceRange = () => {
+    console.log(Number(fromValue), Number(toValue));
+  };
   const handleChangeFilter = (filterState) => {
     setSort(filterState);
+  };
+  const handleCategorySend = (data) => {
+    console.log(data);
+    setCategory(data);
   };
   const initialUser =
     typeof localStorage !== "undefined"
@@ -74,7 +85,7 @@ export default function Shop() {
               <div className="flex flex-row space-x-2 font-light">
                 <h1 className="font-semibold">Shop </h1>
                 <h1 className="font-semibold"> / </h1>
-                <h1> Shop</h1>
+                <h1>Shop</h1>
               </div>
             </div>
             <LayoutBar
@@ -83,17 +94,51 @@ export default function Shop() {
             />
           </div>
           <div className="flex flex-row px-64 justify-between">
-            <FilterBar className="w-1/3" />
-            <div className="grid gap-4 grid-cols-3 mt-3 w-2/3">
-              {sortedProducts(sort).map((product, index) => (
-                <ProductCard
-                  key={index}
-                  title={product.name}
-                  category={product.category_id}
-                  price={product.price.toFixed(2)}
-                  imgsrc={product.imageLink}
-                />
-              ))}
+            <FilterBar
+              sendCategory={handleCategorySend}
+              fromValue={fromValue}
+              toValue={toValue}
+              setFromValue={setFromValue}
+              setToValue={setToValue}
+              handlePriceRange={handlePriceRange}
+              className="w-1/3"
+            />
+            <div className="grid gap-4 grid-cols-3 mt-3 w-2/3 max-2xl:grid-cols-2">
+              {category === "none"
+                ? sortedProducts(sort)
+                    .filter((item) => {
+                      console.log(item.price);
+                      return (
+                        item.price <= Number(toValue) &&
+                        item.price >= Number(fromValue)
+                      );
+                    })
+                    .map((product, index) => (
+                      <ProductCard
+                        key={index}
+                        title={product.name}
+                        category={product.category_id}
+                        price={product.price.toFixed(2)}
+                        imgsrc={product.imageLink}
+                      />
+                    ))
+                : sortedProducts(sort)
+                    .filter((item) => {
+                      return (
+                        item.categoryId === category &&
+                        item.price <= Number(toValue) &&
+                        item.price >= Number(fromValue)
+                      );
+                    })
+                    .map((product, index) => (
+                      <ProductCard
+                        key={index}
+                        title={product.name}
+                        category={product.category_id}
+                        price={product.price.toFixed(2)}
+                        imgsrc={product.imageLink}
+                      />
+                    ))}
             </div>
           </div>
         </div>

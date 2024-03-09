@@ -8,10 +8,10 @@ import {
 } from "react-icons/bs";
 const Footer = () => {
   return (
-    <footer class="footer-1 bg-gray-100 py-8 sm:py-12 mt-64">
-      <div class="container mx-auto px-4">
+    <footer class="footer-1 bg-gray-100 py-8 sm:py-12 mt-64 px-64 ">
+      <div class="container mx-auto">
         <div class="sm:flex sm:flex-wrap sm:-mx-4 md:py-4">
-          <div class="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6">
+          <div class="sm:w-1/2 md:w-1/4 xl:w-1/6">
             <h5 class="font-semibold text-sm mb-3 text-gray-400">PRODUCT</h5>
             <ul class="list-none footer-links text-sm font-semibold text-gray-500">
               <li class="mb-2">
@@ -138,27 +138,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div class="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6 mt-8 md:mt-0">
-            <h5 class="font-semibold text-sm mb-3 text-gray-400">HELP</h5>
-            <ul class="list-none footer-links text-sm font-semibold text-gray-500">
-              <li class="mb-2">
-                <a
-                  href="#"
-                  class="border-b border-solid border-transparent hover:border-orange-400 hover:text-orange-400"
-                >
-                  Customer Service
-                </a>
-              </li>
-              <li class="mb-2">
-                <a
-                  href="#"
-                  class="border-b border-solid border-transparent hover:border-orange-400 hover:text-orange-400"
-                >
-                  Hotline
-                </a>
-              </li>
-            </ul>
-          </div>
+
           <div class="px-4 mt-4 sm:w-1/3 xl:w-1/6 sm:mx-auto xl:mt-0 xl:ml-auto">
             <h5 class="font-semibold text-sm mb-3 text-gray-400 right-0">
               STAY CONNECTED
