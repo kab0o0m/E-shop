@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 import CartItem from "./CartItem";
 import { MdShoppingCart } from "react-icons/md";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -20,6 +20,7 @@ import {
 
 const ShoppingCartSheet = () => {
   const [myCartItems, setMyCartItems] = useState([]);
+  const [total, setTotal] = useState(null);
   const getMyCartItems = async () => {
     const myCartItems = await axios.post(
       "http://localhost:8080/api/cart_item/my_cart",
@@ -28,8 +29,12 @@ const ShoppingCartSheet = () => {
       }
     );
     setMyCartItems(myCartItems.data);
+    setTotal(JSON.parse(localStorage.getItem("session")).total.toFixed(2));
     console.log(myCartItems.data);
   };
+  useEffect(() => {
+    getMyCartItems();
+  });
 
   return (
     <Sheet>
@@ -61,9 +66,7 @@ const ShoppingCartSheet = () => {
           <div className="flex flex-col w-full space-y-5">
             <div className="border-y py-2 flex flex-row justify-between">
               <h1 className="font-light">Total: </h1>
-              <h1 className="font-semibold text-lg text-gray-700">
-                ${JSON.parse(localStorage.getItem("session")).total.toFixed(2)}
-              </h1>
+              <h1 className="font-semibold text-lg text-gray-700">{total}</h1>
             </div>
             <SheetClose asChild>
               <Link href="/checkout" className="w-full">

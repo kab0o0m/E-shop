@@ -3,11 +3,12 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import CartItem from "./CartItem";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const ShoppingCart = () => {
   const [myCartItems, setMyCartItems] = useState([]);
+  const [total, setTotal] = useState(null);
   const getMyCartItems = async () => {
     const myCartItems = await axios.post(
       "http://localhost:8080/api/cart_item/my_cart",
@@ -15,6 +16,7 @@ const ShoppingCart = () => {
         sessionId: JSON.parse(localStorage.getItem("session")).id,
       }
     );
+    setTotal(JSON.parse(localStorage.getItem("session")).total.toFixed(2));
     setMyCartItems(myCartItems.data);
     console.log(myCartItems.data);
   };
@@ -38,9 +40,7 @@ const ShoppingCart = () => {
       </ScrollArea>
       <div className="border-y py-2 flex flex-row justify-between">
         <h1 className="font-light">Total: </h1>
-        <h1 className="font-semibold text-lg text-gray-700">
-          ${JSON.parse(localStorage.getItem("session")).total.toFixed(2)}
-        </h1>
+        <h1 className="font-semibold text-lg text-gray-700">{total}</h1>
       </div>
     </div>
   );
