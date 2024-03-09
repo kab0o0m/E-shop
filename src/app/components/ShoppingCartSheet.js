@@ -119,12 +119,21 @@ const ShoppingCartSheet = () => {
           <div className="flex flex-col w-full space-y-5">
             <div className="border-y py-2 flex flex-row justify-between">
               <h1 className="font-light">Total: </h1>
-              <h1 className="font-semibold text-lg text-gray-700">{total}</h1>
+              <h1 className="font-semibold text-lg text-gray-700">
+                {" "}
+                ${total === null ? "0.0" : total}
+              </h1>
             </div>
             <SheetClose asChild>
-              <Link href="/checkout" className="w-full">
-                <Button className="w-full">Checkout</Button>
-              </Link>
+              {total === null ? (
+                <Button className="w-full" disabled>
+                  Checkout
+                </Button>
+              ) : (
+                <Link href="/checkout" className="w-full">
+                  <Button className="w-full">Checkout</Button>
+                </Link>
+              )}
             </SheetClose>
           </div>
         </SheetFooter>

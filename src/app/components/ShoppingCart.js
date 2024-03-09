@@ -39,6 +39,7 @@ const ShoppingCart = () => {
         console.log("targetproductId: ", targetProductId);
         console.log(response);
       }
+
       const sessionResponse = await axios.post(
         "http://localhost:8080/api/session/total",
         {
@@ -90,7 +91,9 @@ const ShoppingCart = () => {
       </ScrollArea>
       <div className="border-y py-2 flex flex-row justify-between">
         <h1 className="font-light">Total: </h1>
-        <h1 className="font-semibold text-lg text-gray-700">{total}</h1>
+        <h1 className="font-semibold text-lg text-gray-700">
+          ${total === null ? "0.0" : total}
+        </h1>
       </div>
     </div>
   );
