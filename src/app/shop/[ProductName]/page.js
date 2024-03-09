@@ -27,32 +27,19 @@ const Items = ({ params }) => {
   }, []);
   const addToCart = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/cart_item",
-        {
-          sessionId: JSON.parse(localStorage.getItem("session")).id,
-          productId: item.id,
-          quantity: qty,
-        },
-        {
-          headers: {
-            Authorization: localStorage.getItem("jwtToken"),
-          },
-        }
-      );
+      const response = await axios.post("http://localhost:8080/api/cart_item", {
+        sessionId: JSON.parse(localStorage.getItem("session")).id,
+        productId: item.id,
+        quantity: qty,
+      });
       console.log(response);
-      const sessionUpdateResponse = await axios.post(
-        "http://localhost:8080/api/session",
+      const sessionResponse = await axios.post(
+        "http://localhost:8080/api/session/total",
         {
           sessionId: JSON.parse(localStorage.getItem("session")).id,
-          price: qty * item.price,
         }
       );
-      console.log(sessionUpdateResponse.data);
-      localStorage.setItem(
-        "session",
-        JSON.stringify(sessionUpdateResponse.data)
-      );
+      localStorage.setItem("session", JSON.stringify(sessionResponse.data));
       toast({
         title: "Item added to cart!",
         description: "Go to your shopping cart to check out.",
