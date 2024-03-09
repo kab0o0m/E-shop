@@ -23,7 +23,7 @@ import {
 const ShoppingCartSheet = () => {
   const { toast } = useToast();
   const [myCartItems, setMyCartItems] = useState([]);
-  const [total, setTotal] = useState(null);
+  const [total, setTotal] = useState(0);
   const getMyCartItems = async () => {
     try {
       const sessionData = JSON.parse(localStorage.getItem("session"));
@@ -33,7 +33,8 @@ const ShoppingCartSheet = () => {
           { sessionId: sessionData.id }
         );
         setMyCartItems(response.data);
-        setTotal(sessionData.total ? sessionData.total.toFixed(2) : null);
+        setTotal(sessionData.total ? sessionData.total.toFixed(2) : 0);
+        console.log(sessionData.total);
       }
     } catch (error) {
       console.error("Error fetching cart items:", error);

@@ -5,6 +5,7 @@ import CheckoutForm from "../components/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import ShoppingCart from "../components/ShoppingCart";
+import axios from "axios";
 
 const stripePromise = loadStripe(
   "pk_test_51Os5EMP9xUJVEDnu2yjZFNI1c7PqxT9VgUaMDl2aTVe0M4FzJYbHbPuLPuOfL1zkn0NANXSactWRN8BJFneYxb0E00wuTe5QTd"
@@ -12,6 +13,30 @@ const stripePromise = loadStripe(
 
 const CheckoutPage = () => {
   const [countries, setCountries] = useState([]);
+  const [isPaid, setIsPaid] = useState(false);
+
+  const deleteCart = async () => {
+    try {
+      const sessionData = JSON.parse(localStorage.getItem("session"));
+      console.log(sessionData);
+
+      const response = await axios.delete(
+        "http://localhost:8080/api/cart_item/all",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: {
+            sessionId: `${sessionData.userId}`,
+          },
+        }
+      );
+      delete sessionData.total;
+      console.log(response.data); // Log the response data
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
+  };
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
@@ -30,128 +55,152 @@ const CheckoutPage = () => {
     // Handle successful payment here
     console.log("Payment successful");
     console.log(paymentMethod);
+    deleteCart();
+
+    setIsPaid(true);
   };
 
   return (
     <div className="flex justify-evenly mt-8 w-full">
-      <div className="w-full max-w-4xl flex justify-between shadow-md rounded-lg">
-        {/* Payment Details Section */}
-        <div className="w-1/2 bg-gray-100 p-8 rounded-l-lg">
-          <h2 className="text-xl font-bold mb-4">Contact</h2>
-          <div className="mb-4">
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="mt-1 p-2 w-full border rounded-md"
-              placeholder="Email or phone number"
-            />
-          </div>
-          <h2 className="text-xl font-bold mb-4">Delivery</h2>
-          {countries.length > 0 && (
-            <select
-              id="country"
-              name="country"
-              className="mb-1 p-2 w-full border rounded-md"
-              defaultValue=""
-            >
-              <option value="" disabled hidden>
-                Country/Region
-              </option>
-              {countries.map((country) => (
-                <option key={country.code} value={country.code}>
-                  {country.name}
+      {!isPaid && (
+        <div className="w-full max-w-4xl flex justify-between shadow-md rounded-lg">
+          {/* Payment Details Section */}
+          <div className="w-1/2 bg-gray-100 p-8 rounded-l-lg">
+            <h2 className="text-xl font-bold mb-4">Contact</h2>
+            <div className="mb-4">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="mt-1 p-2 w-full border rounded-md"
+                placeholder="Email or phone number"
+                required
+              />
+            </div>
+            <h2 className="text-xl font-bold mb-4">Delivery</h2>
+            {countries.length > 0 && (
+              <select
+                id="country"
+                name="country"
+                className="mb-1 p-2 w-full border rounded-md"
+                defaultValue=""
+                required
+              >
+                <option value="" disabled hidden>
+                  Country/Region
                 </option>
-              ))}
-            </select>
-          )}
+                {countries.map((country) => (
+                  <option key={country.code} value={country.code}>
+                    {country.name}
+                  </option>
+                ))}
+              </select>
+            )}
 
-          <div className="mt-2 mb-4 flex">
-            <div className="w-1/2 mr-2">
-              <label
-                htmlFor="firstName"
-                className="block text-sm font-medium text-gray-700"
-              >
-                First Name
-              </label>
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                className="mt-1 p-2 w-full border rounded-md"
-              />
+            <div className="mt-2 mb-4 flex">
+              <div className="w-1/2 mr-2">
+                <label
+                  htmlFor="firstName"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  className="mt-1 p-2 w-full border rounded-md"
+                  required
+                />
+              </div>
+              <div className="w-1/2">
+                <label
+                  htmlFor="lastName"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  className="mt-1 p-2 w-full border rounded-md"
+                  required
+                />
+              </div>
             </div>
-            <div className="w-1/2">
-              <label
-                htmlFor="lastName"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Last Name
-              </label>
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                className="mt-1 p-2 w-full border rounded-md"
-              />
+            <div className="mb-4 flex">
+              <div className="w-1/3 mr-2">
+                <label
+                  htmlFor="city"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  City
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  className="mt-1 p-2 w-full border rounded-md"
+                  required
+                />
+              </div>
+              <div className="w-1/3 mr-2">
+                <label
+                  htmlFor="state"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  State
+                </label>
+                <input
+                  type="text"
+                  id="state"
+                  name="state"
+                  className="mt-1 p-2 w-full border rounded-md"
+                  required
+                />
+              </div>
+              <div className="w-1/3">
+                <label
+                  htmlFor="zip"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Zip Code
+                </label>
+                <input
+                  type="text"
+                  id="zip"
+                  name="zip"
+                  className="mt-1 p-2 w-full border rounded-md"
+                  required
+                />
+              </div>
             </div>
+            {/* Shopping cart items and summary goes here */}
+            <Elements stripe={stripePromise}>
+              <CheckoutForm handleSubmit={handleSubmit} />
+            </Elements>
           </div>
-          <div className="mb-4 flex">
-            <div className="w-1/3 mr-2">
-              <label
-                htmlFor="city"
-                className="block text-sm font-medium text-gray-700"
-              >
-                City
-              </label>
-              <input
-                type="text"
-                id="city"
-                name="city"
-                className="mt-1 p-2 w-full border rounded-md"
-              />
-            </div>
-            <div className="w-1/3 mr-2">
-              <label
-                htmlFor="state"
-                className="block text-sm font-medium text-gray-700"
-              >
-                State
-              </label>
-              <input
-                type="text"
-                id="state"
-                name="state"
-                className="mt-1 p-2 w-full border rounded-md"
-              />
-            </div>
-            <div className="w-1/3">
-              <label
-                htmlFor="zip"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Zip Code
-              </label>
-              <input
-                type="text"
-                id="zip"
-                name="zip"
-                className="mt-1 p-2 w-full border rounded-md"
-              />
-            </div>
+          {/* Shopping Cart Section */}
+          <div className="w-1/2 bg-white p-8 rounded-r-lg">
+            <h2 className="text-xl font-bold mb-4">Shopping Cart</h2>
+            {/* Shopping cart items and summary goes here */}
+            <ShoppingCart />
           </div>
-          {/* Shopping cart items and summary goes here */}
-          <Elements stripe={stripePromise}>
-            <CheckoutForm handleSubmit={handleSubmit} />
-          </Elements>
         </div>
-        {/* Shopping Cart Section */}
-        <div className="w-1/2 bg-white p-8 rounded-r-lg">
-          <h2 className="text-xl font-bold mb-4">Shopping Cart</h2>
-          {/* Shopping cart items and summary goes here */}
-          <ShoppingCart />
+      )}
+      {isPaid && (
+        <div className="welcome text-center mt-8">
+          <h1 className="text-3xl font-bold mb-4">Payment successful!</h1>
+          <h1 className="text-xl mb-4">
+            Click{" "}
+            <a href="/shop" className="text-yellow-500 hover:underline ">
+              here
+            </a>{" "}
+            to continue shopping
+          </h1>
         </div>
-      </div>
+      )}
     </div>
   );
 };
