@@ -8,14 +8,21 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 const ShoppingCart = () => {
   const [myCartItems, setMyCartItems] = useState([]);
+  const [total, setTotal] = useState(null);
   const getMyCartItems = async () => {
-    const myCartItems = await axios.post(
-      "http://localhost:8080/api/cart_item/my_cart",
-      {
-        sessionId: JSON.parse(localStorage.getItem("session")).id,
+    try {
+      const sessionData = JSON.parse(localStorage.getItem("session"));
+      if (sessionData && sessionData.id) {
+        const response = await axios.post(
+          "http://localhost:8080/api/cart_item/my_cart",
+          { sessionId: sessionData.id }
+        );
+        setMyCartItems(response.data);
+        setTotal(sessionData.total ? sessionData.total.toFixed(2) : null);
       }
-    );
-    setMyCartItems(myCartItems.data);
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
   };
   useEffect(() => {
     getMyCartItems();
@@ -37,9 +44,7 @@ const ShoppingCart = () => {
       </ScrollArea>
       <div className="border-y py-2 flex flex-row justify-between">
         <h1 className="font-light">Total: </h1>
-        <h1 className="font-semibold text-lg text-gray-700">
-          ${JSON.parse(localStorage.getItem("session")).total.toFixed(2)}
-        </h1>
+        <h1 className="font-semibold text-lg text-gray-700">{total}</h1>
       </div>
     </div>
   );
