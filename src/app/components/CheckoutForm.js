@@ -20,12 +20,14 @@ const CheckoutForm = ({ handleSubmit }) => {
     });
 
     if (error) {
-      console.error("Error creating payment method:", error);
+      console.error("Error creating payment method:", error.message);
+      alert(error.message);
     } else {
       handleSubmit(paymentMethod);
     }
 
     setLoading(false);
+    console.log(localStorage);
   };
 
   return (
