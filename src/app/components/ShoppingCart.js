@@ -16,7 +16,6 @@ const ShoppingCart = () => {
       }
     );
     setMyCartItems(myCartItems.data);
-    console.log(myCartItems.data);
   };
   useEffect(() => {
     getMyCartItems();
