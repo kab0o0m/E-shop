@@ -3,6 +3,7 @@ import { Theme } from "@radix-ui/themes";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import Navbar from "./Navbar";
+import Footer from "./components/Footer";
 
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700"],
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
       <body className={`${roboto.variable}`}>
         <Navbar />
         <Theme>{children}</Theme>
+        <Footer />
         <Toaster />
       </body>
     </html>
