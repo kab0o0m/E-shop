@@ -34,7 +34,6 @@ const ShoppingCartSheet = () => {
         );
         setMyCartItems(response.data);
         setTotal(sessionData.total ? sessionData.total.toFixed(2) : 0);
-        console.log(sessionData.total);
       }
     } catch (error) {
       console.error("Error fetching cart items:", error);

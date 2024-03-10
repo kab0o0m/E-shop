@@ -45,6 +45,38 @@ const CheckoutPage = () => {
     }
   };
 
+  const updateAvailability = async () => {
+    try {
+      const sessionData = JSON.parse(localStorage.getItem("session"));
+      if (sessionData && sessionData.id) {
+        const payload = {
+          sessionId: "1",
+        };
+
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        axios
+          .post(
+            "http://localhost:8080/api/cart_item/updateAvailability",
+            payload,
+            config
+          )
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => response.json())
@@ -62,8 +94,8 @@ const CheckoutPage = () => {
     // Handle successful payment here
     console.log("Payment successful");
     console.log(paymentMethod);
+    updateAvailability();
     deleteCart();
-
     setIsPaid(true);
   };
 
