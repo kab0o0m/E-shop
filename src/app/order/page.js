@@ -2,18 +2,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import OrderCard from "../components/OrderCard";
+import { useRouter } from "next/navigation";
 const Order = () => {
+  const router = useRouter();
   const [orderItem, setOrderItem] = useState({});
   const getOrder = async () => {
+    if (JSON.parse(localStorage.getItem("jwtToken")) === null) {
+      router.push("/account");
+      return;
+    }
     const response = await axios.post(
       "http://localhost:8080/api/order/getBySessionId",
       {
         sessionId: JSON.parse(localStorage.getItem("session")).id,
-      },
-      {
-        headers: {
-          Authorization: JSON.parse(localStorage.getItem("jwtToken")),
-        },
       }
     );
     setOrderItem(response.data);

@@ -33,19 +33,11 @@ const Items = ({ params }) => {
         router.push("/account");
         return;
       }
-      const response = await axios.post(
-        "http://localhost:8080/api/cart_item",
-        {
-          sessionId: JSON.parse(localStorage.getItem("session")).id,
-          productId: item.id,
-          quantity: qty,
-        },
-        {
-          headers: {
-            Authorization: JSON.parse(localStorage.getItem("jwtToken")),
-          },
-        }
-      );
+      const response = await axios.post("http://localhost:8080/api/cart_item", {
+        sessionId: JSON.parse(localStorage.getItem("session")).id,
+        productId: item.id,
+        quantity: qty,
+      });
 
       console.log("SUCCESS 1/2");
       console.log(response);
@@ -53,11 +45,6 @@ const Items = ({ params }) => {
         "http://localhost:8080/api/session/total",
         {
           sessionId: JSON.parse(localStorage.getItem("session")).id,
-        },
-        {
-          headers: {
-            Authorization: JSON.parse(localStorage.getItem("jwtToken")),
-          },
         }
       );
       localStorage.setItem("session", JSON.stringify(sessionResponse.data));
@@ -78,11 +65,7 @@ const Items = ({ params }) => {
   };
   const products = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/product", {
-        headers: {
-          Authorization: localStorage.getItem("jwtToken"),
-        },
-      });
+      const response = await axios.get("http://localhost:8080/api/product");
       setItem(
         response.data.filter(
           (item) => item.name === params.ProductName.replace(/%20/g, " ")
