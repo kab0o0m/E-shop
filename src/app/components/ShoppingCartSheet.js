@@ -91,7 +91,10 @@ const ShoppingCartSheet = () => {
           {myCartItems.map((item, index) => {
             return (
               <>
-                <div className="flex flex-row border-t justify-between">
+                <div
+                  key={index}
+                  className="flex flex-row border-t justify-between"
+                >
                   <CartItem
                     key={index}
                     price={item.price}
@@ -101,6 +104,7 @@ const ShoppingCartSheet = () => {
                   />
                   <div>
                     <button
+                      key={index}
                       className="p-2"
                       onClick={() => {
                         removeFromCart(item.productId);
