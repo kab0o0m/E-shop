@@ -9,6 +9,11 @@ const Order = () => {
       "http://localhost:8080/api/order/getBySessionId",
       {
         sessionId: JSON.parse(localStorage.getItem("session")).id,
+      },
+      {
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("jwtToken")),
+        },
       }
     );
     setOrderItem(response.data);

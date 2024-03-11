@@ -8,7 +8,7 @@
 .account-header {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-;
   padding: 0 0 0 5rem;
   background-color: #f2f2f2;
   gap: 1rem;
@@ -99,22 +99,22 @@ form input {
   margin: 0 0 5rem 0;
 }
 
-.welcome h1{
+.welcome h1 {
   font-size: 3rem;
 }
 
 .welcome a {
-  color: #FFB400;
+  color: #ffb400;
 }
 
-.account-details{
+.account-details {
   padding: 5rem 0 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.account-details p{
+.account-details p {
   font-size: 1.5rem;
 }
 
@@ -132,8 +132,3 @@ form input {
   border: 1px solid black;
   margin: 2rem 0 0 0;
 }
-
-
-
-
-

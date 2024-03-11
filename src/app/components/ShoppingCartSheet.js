@@ -30,7 +30,12 @@ const ShoppingCartSheet = () => {
       if (sessionData && sessionData.id) {
         const response = await axios.post(
           "http://localhost:8080/api/cart_item/my_cart",
-          { sessionId: sessionData.id }
+          { sessionId: sessionData.id },
+          {
+            headers: {
+              Authorization: JSON.parse(localStorage.getItem("jwtToken")),
+            },
+          }
         );
         setMyCartItems(response.data);
         setTotal(sessionData.total ? sessionData.total.toFixed(2) : 0);
@@ -48,7 +53,12 @@ const ShoppingCartSheet = () => {
       if (sessionData && sessionData.id) {
         const response = await axios.delete(
           "http://localhost:8080/api/cart_item/remove_item",
-          { data: { sessionId: sessionData.id, productId: targetProductId } }
+          {
+            headers: {
+              Authorization: JSON.parse(localStorage.getItem("jwtToken")),
+            },
+            data: { sessionId: sessionData.id, productId: targetProductId },
+          }
         );
         console.log("targetproductId: ", targetProductId);
         console.log(response);
@@ -58,6 +68,11 @@ const ShoppingCartSheet = () => {
         "http://localhost:8080/api/session/total",
         {
           sessionId: sessionData.id,
+        },
+        {
+          headers: {
+            Authorization: JSON.parse(localStorage.getItem("jwtToken")),
+          },
         }
       );
       localStorage.setItem("session", JSON.stringify(sessionResponse.data));

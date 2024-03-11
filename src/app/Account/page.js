@@ -88,48 +88,50 @@ export default function Account() {
 
         {/* Body */}
         {!isLogin && (
-          <div className="account-body">
-            <div className="login">
-              <h1 className="text-3xl font-light">Login</h1>
-            </div>
-            <form action="" onSubmit={handleSubmit}>
-              <div className="email">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  type="text"
-                  id="email"
-                  name="email"
-                  placeholder="john.doe@mail.com"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-[30rem]"
-                />
+          <div className="w-fit mx-auto">
+            <div className="account-body w-fit mx-auto">
+              <div className="login">
+                <h1 className="text-3xl font-light">Login</h1>
               </div>
+              <form action="" onSubmit={handleSubmit}>
+                <div className="email">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    type="text"
+                    id="email"
+                    name="email"
+                    placeholder="john.doe@mail.com"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-[30rem]"
+                  />
+                </div>
 
-              <div className="password">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  required
-                  className="w-[30rem]"
-                />
-              </div>
-              {isFailLogin && (
-                <p className="text-red-400">Invalid username or password!</p>
-              )}
-              <div className="enter mt-5">
-                <Button type="submit" className="rounded-full px-12 my-3">
-                  Login
-                </Button>
-                <a href="account/register">Create Account</a>
-              </div>
-            </form>
+                <div className="password">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    required
+                    className="w-[30rem]"
+                  />
+                </div>
+                {isFailLogin && (
+                  <p className="text-red-400">Invalid username or password!</p>
+                )}
+                <div className="enter mt-5">
+                  <Button type="submit" className="rounded-full px-12 my-3">
+                    Login
+                  </Button>
+                  <a href="account/register">Create Account</a>
+                </div>
+              </form>
+            </div>
           </div>
         )}
         {isLogin && (

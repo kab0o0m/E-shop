@@ -7,8 +7,10 @@ import ProductCarousel from "@/app/components/ProductCarousel";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 const Items = ({ params }) => {
+  const router = useRouter();
   const { toast } = useToast();
   const [qty, setQty] = useState(0);
   const [item, setItem] = useState({});
@@ -27,16 +29,35 @@ const Items = ({ params }) => {
   }, []);
   const addToCart = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/api/cart_item", {
-        sessionId: JSON.parse(localStorage.getItem("session")).id,
-        productId: item.id,
-        quantity: qty,
-      });
+      if (JSON.parse(localStorage.getItem("jwtToken")) === null) {
+        router.push("/account");
+        return;
+      }
+      const response = await axios.post(
+        "http://localhost:8080/api/cart_item",
+        {
+          sessionId: JSON.parse(localStorage.getItem("session")).id,
+          productId: item.id,
+          quantity: qty,
+        },
+        {
+          headers: {
+            Authorization: JSON.parse(localStorage.getItem("jwtToken")),
+          },
+        }
+      );
+
+      console.log("SUCCESS 1/2");
       console.log(response);
       const sessionResponse = await axios.post(
         "http://localhost:8080/api/session/total",
         {
           sessionId: JSON.parse(localStorage.getItem("session")).id,
+        },
+        {
+          headers: {
+            Authorization: JSON.parse(localStorage.getItem("jwtToken")),
+          },
         }
       );
       localStorage.setItem("session", JSON.stringify(sessionResponse.data));
@@ -45,6 +66,7 @@ const Items = ({ params }) => {
         title: "Item added to cart!",
         description: "Go to your shopping cart to check out.",
       });
+      console.log("SUCCESS 2/2");
     } catch (error) {
       console.log(error);
       toast({

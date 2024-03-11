@@ -23,6 +23,11 @@ const CheckoutPage = () => {
         "http://localhost:8080/api/order/save",
         {
           sessionId: `${sessionData.id}`,
+        },
+        {
+          headers: {
+            Authorization: JSON.parse(localStorage.getItem("jwtToken")),
+          },
         }
       );
       console.log(postOrderItemResponse);
@@ -32,6 +37,7 @@ const CheckoutPage = () => {
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: JSON.parse(localStorage.getItem("jwtToken")),
           },
           data: {
             sessionId: `${sessionData.userId}`,
