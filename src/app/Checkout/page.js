@@ -20,7 +20,7 @@ const CheckoutPage = () => {
       const sessionData = JSON.parse(localStorage.getItem("session"));
       console.log("sessionData: ", sessionData);
       const postOrderItemResponse = await axios.post(
-        "http://localhost:8080/api/order/save",
+        "http://localhost:8080/api/orderItem/save",
         {
           sessionId: `${sessionData.id}`,
         }

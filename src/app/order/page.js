@@ -3,26 +3,39 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import OrderCard from "../components/OrderCard";
 import { useRouter } from "next/navigation";
+import OrderTable from "../components/OrderTable";
 const Order = () => {
   const router = useRouter();
   const [orderItem, setOrderItem] = useState({});
+  const groupJsonByOrderId = (jsonArray) => {
+    const groupedJson = {};
+    jsonArray.forEach((obj) => {
+      const orderId = obj.orderId;
+      if (!groupedJson[orderId]) {
+        groupedJson[orderId] = [];
+      }
+      groupedJson[orderId].push(obj);
+    });
+
+    const result = Object.values(groupedJson);
+    result.sort((a, b) => b[0].orderId - a[0].orderId);
+
+    return result;
+  };
   const getOrder = async () => {
-    if (JSON.parse(localStorage.getItem("jwtToken")) === null) {
-      router.push("/account");
-      return;
-    }
     const response = await axios.post(
-      "http://localhost:8080/api/order/getBySessionId",
+      "http://localhost:8080/api/orderItem/getBySessionId",
       {
         sessionId: JSON.parse(localStorage.getItem("session")).id,
       }
     );
-    setOrderItem(response.data);
-    console.log(response.data);
+    setOrderItem(groupJsonByOrderId(response.data));
+    console.log(groupJsonByOrderId(response.data));
   };
   useEffect(() => {
     getOrder();
   }, []);
+
   return (
     <div>
       {orderItem.length <= 0 && (
@@ -44,25 +57,12 @@ const Order = () => {
           <div className="flex justify-center text-3xl">Your Orders</div>
 
           {orderItem.map((item, index) => (
-            <OrderCard
+            <OrderTable
+              orderId={item[0].orderId}
+              orderItem={item}
               key={index}
-              quantity={item.quantity}
-              imgLink={item.imageLink}
-              price={item.price}
-              name={item.name}
-              className="w-full"
             />
           ))}
-          <div className="mt-8 flex justify-center">
-            <div className="text-3xl font-semibold">Total: </div>
-            <div className="text-3xl ml-2 text-orange-400">
-              {" "}
-              {/* Adjust the margin according to your preference */}$
-              {orderItem
-                .reduce((acc, item) => acc + item.price * item.quantity, 0)
-                .toFixed(2)}
-            </div>
-          </div>
         </div>
       )}
     </div>

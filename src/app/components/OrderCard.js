@@ -4,7 +4,7 @@ const OrderCard = ({ quantity, imgLink, name, price }) => {
   console.log(imgLink);
   return (
     <div>
-      <div className="border-0 rounded-md w-1/2 mx-auto flex flex-row my-2 p-2">
+      <div className="border-b mx-auto flex flex-row my-2 p-2 px-4">
         <Image
           src={imgLink}
           alt={imgLink}
