@@ -23,7 +23,7 @@ const CarouselComp = () => {
   return (
     <div className="h-screen">
       <Carousel
-        className="border h-4/5 bg-[#F6F6F6] "
+        className="border bg-[#F6F6F6]"
         plugins={[
           Autoplay({
             delay: 3000,
@@ -31,7 +31,7 @@ const CarouselComp = () => {
         ]}
       >
         <CarouselContent>
-          <CarouselItem className="flex flex-row justify-between p-20 px-48">
+          <CarouselItem className="flex flex-row justify-between p-20 px-48 ">
             <div className="flex-col flex">
               <p className="mt-[30%] text-orange-400 font-normal text-medium">
                 - NEW RELEASE 2024 -

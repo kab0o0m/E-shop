@@ -13,7 +13,7 @@ export default function Home() {
     <main>
       <CarouselComp />
       <div className="mx-auto flex flex-col mb-32">
-        <h1 className="text-[50px] font-light mx-auto">Discover More</h1>
+        <h1 className="text-[50px] font-light mx-auto mt-10">Discover More</h1>
         <h1
           className={`${pfDisplay.className} text-[28px] font-light mx-auto -mt-3`}
         >

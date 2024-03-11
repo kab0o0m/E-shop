@@ -172,10 +172,14 @@ export default function Register() {
           </div>
         )}
         {isCreate && (
-          <div>
-            <h1>
+          <div className="text-center mt-8">
+            <h1 className="text-3xl font-bold mb-4">
               Thank you for registering {formData.firstName} {formData.lastName}
-              ! Click <a href="/account">here</a> to login
+              ! Click{" "}
+              <a href="/account" className="text-yellow-500 hover:underline ">
+                here
+              </a>{" "}
+              to login
             </h1>
             <p>You will be redirected in 5s...</p>
           </div>
