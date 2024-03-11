@@ -97,6 +97,12 @@ const Items = ({ params }) => {
                 {params.ProductName.replace(/%20/g, " ")}
               </h1>
               <h1 className="text-[20px]">${item.price}</h1>
+              <div className="text-[15px] flex flex-row space-x-1">
+                <h1 className="font-gray-700">Availability: </h1>
+                <h1 className="text-orange-400 font-semibold">
+                  {item.availability}
+                </h1>
+              </div>
               <h1 className="text-[15px] max-w-[800px]">{item.description}</h1>
               <div className="flex flex-row items-center space-x-3">
                 <h1 className="text-[16px]">Quantity: </h1>
