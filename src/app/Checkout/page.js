@@ -18,9 +18,16 @@ const CheckoutPage = () => {
   const deleteCart = async () => {
     try {
       const sessionData = JSON.parse(localStorage.getItem("session"));
-      console.log(sessionData);
+      console.log("sessionData: ", sessionData);
+      const postOrderItemResponse = await axios.post(
+        "http://localhost:8080/api/order/save",
+        {
+          sessionId: `${sessionData.id}`,
+        }
+      );
+      console.log(postOrderItemResponse);
 
-      const response = await axios.delete(
+      const deleteResponse = await axios.delete(
         "http://localhost:8080/api/cart_item/all",
         {
           headers: {
@@ -38,8 +45,7 @@ const CheckoutPage = () => {
         // Set the updated session data back to localStorage
         localStorage.setItem("session", JSON.stringify(sessionData));
       }
-
-      console.log(response.data); // Log the response data
+      console.log(deleteResponse.data); // Log the response data
     } catch (error) {
       console.error("Error fetching cart items:", error);
     }

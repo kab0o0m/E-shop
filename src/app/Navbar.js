@@ -6,7 +6,7 @@ import Link from "next/link";
 import Navigation from "./components/Navigation";
 import ShoppingCartSheet from "./components/ShoppingCartSheet";
 import { FaUser } from "react-icons/fa6";
-import { MdShoppingCart } from "react-icons/md";
+import { IoBagHandleSharp } from "react-icons/io5";
 import { Playfair_Display } from "next/font/google";
 import { useState, useEffect } from "react";
 import {
@@ -73,6 +73,9 @@ const Navbar = () => {
               <FaUser size={18} className="mt-1 " />
             </Link>
             <ShoppingCartSheet />
+            <Link href="/order">
+              <IoBagHandleSharp size={22} />
+            </Link>
           </div>
         </div>
       </nav>
